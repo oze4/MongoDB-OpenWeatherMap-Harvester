@@ -29,9 +29,9 @@ namespace OpenWeatherHarvester
         private static void GetHoustonUsWeather_AndSaveToMongo()
         {
             // build mongo connection
-            var username = "mo";
-            var password = "Picante1!1";
-            var mongoHost = "domo-shard-00-00-pu9kn.azure.mongodb.net";            
+            var username = "-";
+            var password = "-";
+            var mongoHost = "-";            
             var mongoCredential = new MongoCredential(
                 "SCRAM-SHA-1", 
                 new MongoInternalIdentity("admin", username), 
@@ -48,7 +48,7 @@ namespace OpenWeatherHarvester
             var collection = database.GetCollection<BsonDocument>("Weather");
             
             // get weather 
-            var webreq = WebRequest.Create("http://api.openweathermap.org/data/2.5/weather?q=houston,us&appid=9d6e842241161dffa8f9963157efeded&units=imperial");
+            var webreq = WebRequest.Create("-");
             var webresp = webreq.GetResponse();
             var resp = new StreamReader(webresp.GetResponseStream()).ReadToEnd();
             

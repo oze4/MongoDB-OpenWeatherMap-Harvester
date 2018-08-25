@@ -25,8 +25,8 @@ namespace OpenWeatherHarvester
         [BsonElement(elementName: "visibility")]
         internal int visibility { get; set; }
 
-        [BsonElement(elementName: "base_")]
-        internal string base_ {get;set;}
+        [BsonElement(elementName: "base")]
+        internal string @base {get;set;}
 
         [BsonElement(elementName: "dt")]
         internal int dt { get; set; }
@@ -56,11 +56,12 @@ namespace OpenWeatherHarvester
             dynamic response = JsonConvert.DeserializeObject(
                 new StreamReader(webResponse.GetResponseStream()).ReadToEnd()
                 );
+
             this.dt = response.dt;
             this.weather_id = response.id;
             this.name = response.name;
             this.code = response.cod;
-            this.base_ = response["base"];
+            this.@base = response.@base;
             this.visibility = response.visibility;
             this.main.Temp = response.main.temp;
             this.main.Pressure = response.main.pressure;
@@ -91,11 +92,6 @@ namespace OpenWeatherHarvester
         internal int Longitude { get; set; }
         internal int Latitude { get; set; }
         internal Coordinate() { }
-        internal Coordinate(int longitute, int latitude)
-        {
-            Longitude = longitute;
-            Latitude = latitude;
-        }
     }
 
     [BsonIgnoreExtraElements]
@@ -108,15 +104,6 @@ namespace OpenWeatherHarvester
         internal string Sunrise { get; set; }
         internal string Sunset { get; set; }
         internal Sys() { }
-        internal Sys(int type, int id, int message, string country, string sunrise, string sunset)
-        {
-            Type = type;
-            Id = id;
-            Message = message;
-            Country = country;
-            Sunrise = sunrise;
-            Sunset = sunset;
-        }
     }
 
     [BsonIgnoreExtraElements]
