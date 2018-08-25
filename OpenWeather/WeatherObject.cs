@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json.Linq;
 
 namespace OpenWeatherHarvester
 {
@@ -16,8 +17,8 @@ namespace OpenWeatherHarvester
         [BsonElement(elementName: "weather_id")]
         internal string weather_id { get; set; }
 
-        [BsonElement(elementName: "name")]
-        internal string name { get; set; }
+        [BsonElement(elementName: "city")]
+        internal string city { get; set; }
 
         [BsonElement(elementName: "code")]
         internal int code { get; set; }
@@ -26,10 +27,10 @@ namespace OpenWeatherHarvester
         internal int visibility { get; set; }
 
         [BsonElement(elementName: "base")]
-        internal string @base {get;set;}
+        internal string @base { get; set; }
 
-        [BsonElement(elementName: "dt")]
-        internal int dt { get; set; }
+        [BsonElement(elementName: "dateTime")]
+        internal string dateTime { get; set; }
 
         [BsonElement(elementName: "coord")]
         internal Coordinate coord { get; private set; } = new Coordinate();
@@ -49,39 +50,48 @@ namespace OpenWeatherHarvester
         [BsonElement(elementName: "clouds")]
         internal Clouds clouds { get; private set; } = new Clouds();
 
-        internal WeatherObject() { }
-
-        internal void BuildWeatherobjectFromWebResponse(WebResponse webResponse)
+        internal WeatherObject(JObject json)
         {
-            dynamic response = JsonConvert.DeserializeObject(
-                new StreamReader(webResponse.GetResponseStream()).ReadToEnd()
-                );
+            BuildWeatherobjectFromWebResponse(json);
+        }
 
-            this.dt = response.dt;
-            this.weather_id = response.id;
-            this.name = response.name;
-            this.code = response.cod;
-            this.@base = response.@base;
-            this.visibility = response.visibility;
-            this.main.Temp = response.main.temp;
-            this.main.Pressure = response.main.pressure;
-            this.main.Humidity = response.main.humidity;
-            this.main.Temp_Min = response.main.temp_min;
-            this.main.Temp_Max = response.main.temp_max;
-            this.clouds.All = response.clouds.all;
-            this.coord.Longitude = response.coord.lon;
-            this.coord.Latitude = response.coord.lat;
-            this.weather.Id = response.weather.id;
-            this.weather.Main = response.weather.main;
-            this.weather.Description = response.weather.description;
-            this.wind.Speed = response.wind.speed;
-            this.wind.Degree = response.wind.deg;
-            this.sys.Type = response.sys.type;
-            this.sys.Id = response.sys.id;
-            this.sys.Message = response.sys.message;
-            this.sys.Country = response.sys.country;
-            this.sys.Sunrise = response.sys.sunrise;
-            this.sys.Sunset = response.sys.sunset;
+        private string _setDateTime(dynamic dt)
+        {
+            double ndt = (double)dt;
+            var epoch = new DateTime(1970, 1, 1, 0, 0, 0, 0).ToLocalTime();
+            return epoch.AddSeconds(ndt).ToString("MM-dd-yyyy--hh:mm:sstt");
+        }
+
+        private void BuildWeatherobjectFromWebResponse(JObject responseAsJson)
+        {
+            // example | Console.WriteLine(json["wind"]["speed"]);
+            this.dateTime = responseAsJson["dt"].Value<string>();
+            this.weather_id = responseAsJson["id"].Value<string>();
+            this.city = responseAsJson["name"].Value<string>();
+            this.code = responseAsJson["cod"].Value<int>();
+            this.@base = responseAsJson["base"].Value<string>();
+            this.visibility = responseAsJson["visibility"].Value<int>(); 
+            /*
+            this.main.Temp = responseAsJson.main.Temp;
+            this.main.Pressure = responseAsJson.main.Pressure;
+            this.main.Humidity = responseAsJson.main.Humidity;
+            this.main.Temp_Min = responseAsJson.main.Temp_Min;
+            this.main.Temp_Max = responseAsJson.main.Temp_Max;
+            this.clouds.All = responseAsJson.clouds.All;
+            this.coord.Longitude = responseAsJson.coord.Longitude;
+            this.coord.Latitude = responseAsJson.coord.Latitude;
+            this.weather.Id = responseAsJson.weather.Id;
+            this.weather.Main = responseAsJson.weather.Main;
+            this.weather.Description = responseAsJson.weather.Description;
+            this.wind.Speed = responseAsJson.wind.Speed;
+            this.wind.Degree = responseAsJson.wind.Degree;
+            this.sys.Type = responseAsJson.sys.Type;
+            this.sys.Id = responseAsJson.sys.Id;
+            this.sys.Message = responseAsJson.sys.Message;
+            this.sys.Country = responseAsJson.sys.Country;
+            this.sys.Sunrise = responseAsJson.sys.Sunrise;
+            this.sys.Sunset = responseAsJson.sys.Sunset;
+            */
         }
 
     }
