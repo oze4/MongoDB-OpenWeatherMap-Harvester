@@ -15,22 +15,22 @@ namespace OpenWeatherHarvester
     internal class WeatherObject
     {
         [BsonElement(elementName: "weather_id")]
-        internal string weather_id { get; set; }
+        internal string weather_id { get; private set; }
 
         [BsonElement(elementName: "city")]
-        internal string city { get; set; }
+        internal string city { get; private set; }
 
         [BsonElement(elementName: "code")]
-        internal int code { get; set; }
+        internal int code { get; private set; }
 
         [BsonElement(elementName: "visibility")]
-        internal int visibility { get; set; }
+        internal int visibility { get; private set; }
 
         [BsonElement(elementName: "base")]
-        internal string @base { get; set; }
+        internal string @base { get; private set; }
 
         [BsonElement(elementName: "dateTime")]
-        internal DateTime dateTime { get; set; }
+        internal DateTime dateTime { get; private set; }
 
         [BsonElement(elementName: "coord")]
         internal Coordinate coord { get; private set; } = new Coordinate();
