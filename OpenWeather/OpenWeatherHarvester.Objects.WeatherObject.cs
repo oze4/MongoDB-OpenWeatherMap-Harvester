@@ -1,6 +1,7 @@
 ﻿using System;
 using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json.Linq;
+using OpenWeatherHarvester.Core;
 
 namespace OpenWeatherHarvester.Objects
 {
@@ -48,16 +49,9 @@ namespace OpenWeatherHarvester.Objects
             _buildWeatherobjectFromWebResponse(json);
         }
 
-        private DateTime _convertUTCtoLocalTime(double utcDateTimeString)
-        {
-            var epoch = new DateTime(1970, 1, 1, 0, 0, 0, 0).ToLocalTime();
-            return epoch.AddSeconds(utcDateTimeString);
-        }
-
         private void _buildWeatherobjectFromWebResponse(JObject json)
-        {
-
-            dateTime = _convertUTCtoLocalTime(json["dt"].Value<double>());
+        {            
+            dateTime = TimeConverter.UtcToLocal(json["dt"].Value<double>());
             weather_id = json["id"].Value<string>();
             city = json["name"].Value<string>();
             code = json["cod"].Value<int>();
