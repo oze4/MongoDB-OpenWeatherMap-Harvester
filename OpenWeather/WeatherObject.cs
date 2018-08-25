@@ -30,7 +30,7 @@ namespace OpenWeatherHarvester
         internal string @base { get; set; }
 
         [BsonElement(elementName: "dateTime")]
-        internal string dateTime { get; set; }
+        internal DateTime dateTime { get; set; }
 
         [BsonElement(elementName: "coord")]
         internal Coordinate coord { get; private set; } = new Coordinate();
@@ -52,48 +52,46 @@ namespace OpenWeatherHarvester
 
         internal WeatherObject(JObject json)
         {
-            BuildWeatherobjectFromWebResponse(json);
+            _buildWeatherobjectFromWebResponse(json);
         }
 
-        private string _setDateTime(dynamic dt)
+        private DateTime _convertUTCtoLocalTime(double utcDateTimeString)
         {
-            double ndt = (double)dt;
             var epoch = new DateTime(1970, 1, 1, 0, 0, 0, 0).ToLocalTime();
-            return epoch.AddSeconds(ndt).ToString("MM-dd-yyyy--hh:mm:sstt");
+            return epoch.AddSeconds(utcDateTimeString);
         }
 
-        private void BuildWeatherobjectFromWebResponse(JObject responseAsJson)
+        private void _buildWeatherobjectFromWebResponse(JObject json)
         {
-            // example | Console.WriteLine(json["wind"]["speed"]);
-            this.dateTime = responseAsJson["dt"].Value<string>();
-            this.weather_id = responseAsJson["id"].Value<string>();
-            this.city = responseAsJson["name"].Value<string>();
-            this.code = responseAsJson["cod"].Value<int>();
-            this.@base = responseAsJson["base"].Value<string>();
-            this.visibility = responseAsJson["visibility"].Value<int>(); 
-            /*
-            this.main.Temp = responseAsJson.main.Temp;
-            this.main.Pressure = responseAsJson.main.Pressure;
-            this.main.Humidity = responseAsJson.main.Humidity;
-            this.main.Temp_Min = responseAsJson.main.Temp_Min;
-            this.main.Temp_Max = responseAsJson.main.Temp_Max;
-            this.clouds.All = responseAsJson.clouds.All;
-            this.coord.Longitude = responseAsJson.coord.Longitude;
-            this.coord.Latitude = responseAsJson.coord.Latitude;
-            this.weather.Id = responseAsJson.weather.Id;
-            this.weather.Main = responseAsJson.weather.Main;
-            this.weather.Description = responseAsJson.weather.Description;
-            this.wind.Speed = responseAsJson.wind.Speed;
-            this.wind.Degree = responseAsJson.wind.Degree;
-            this.sys.Type = responseAsJson.sys.Type;
-            this.sys.Id = responseAsJson.sys.Id;
-            this.sys.Message = responseAsJson.sys.Message;
-            this.sys.Country = responseAsJson.sys.Country;
-            this.sys.Sunrise = responseAsJson.sys.Sunrise;
-            this.sys.Sunset = responseAsJson.sys.Sunset;
-            */
+            dateTime = _convertUTCtoLocalTime(json["dt"].Value<double>());
+            weather_id = json["id"].Value<string>();
+            city = json["name"].Value<string>();
+            code = json["cod"].Value<int>();
+            @base = json["base"].Value<string>();
+            visibility = json["visibility"].Value<int>();
+            main.Temp = json["main"]["temp"].Value<int>();
+            main.Pressure = json["main"]["pressure"].Value<int>();
+            main.Humidity = json["main"]["humidity"].Value<int>();
+            main.Temp_Min = json["main"]["temp_min"].Value<int>();
+            main.Temp_Max = json["main"]["temp_max"].Value<int>();
+            clouds.All = json["clouds"]["all"].Value<int>();
+            coord.Longitude = json["coord"]["lon"].Value<int>();
+            coord.Latitude = json["coord"]["lat"].Value<int>();
+            weather.Id = json["weather"]["id"].Value<int>();
+            weather.Main = json["weather"]["main"].Value<string>();
+            weather.Description = json["weather"]["description"].Value<string>();            
+            var baseIconUrl = string.Format("https://openweathermap.org/img/w/"); // set icon
+            var iconCode = json["weather"]["icon"].Value<string>(); // set icon
+            weather.Icon = string.Format("{0}/{1}.png", baseIconUrl, iconCode); // set icon
+            wind.Speed = json["wind"]["speed"].Value<int>();
+            wind.Degree = json["wind"]["deg"].Value<int>();
+            sys.Type = json["sys"]["type"].Value<int>();
+            sys.Id = json["sys"]["id"].Value<int>();
+            sys.Message = json["sys"]["mssage"].Value<int>();
+            sys.Country = json["sys"]["country"].Value<string>();
+            sys.Sunrise = json["sys"]["sunrise"].Value<string>();
+            sys.Sunset = json["sys"]["sunset"].Value<string>();
         }
-
     }
 
     [BsonIgnoreExtraElements]
@@ -122,6 +120,7 @@ namespace OpenWeatherHarvester
         internal int Id { get; set; }
         internal string Main { get; set; }
         internal string Description { get; set; }
+        internal string Icon { get; set; }
         internal Weather() { }
     }
 
