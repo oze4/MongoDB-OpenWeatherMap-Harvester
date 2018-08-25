@@ -27,22 +27,22 @@ namespace OpenWeatherHarvester.Schema
         internal DateTime dateTime { get; private set; }
 
         [BsonElement(elementName: "coord")]
-        internal Coordinate coord { get; private set; } //= new Coordinate() { };
+        internal Coordinate coord { get; private set; }
 
         [BsonElement(elementName: "sys")]
-        internal Sys sys { get; private set; } //= new Sys() { };
+        internal Sys sys { get; private set; } 
 
         [BsonElement(elementName: "Weather")]
-        internal Weather weather { get; private set; } // = new Weather() { };
+        internal Weather weather { get; private set; }
 
         [BsonElement(elementName: "main")]
-        internal Main main { get; private set; } // = new Main() { };
+        internal Main main { get; private set; } 
 
         [BsonElement(elementName: "wind")]
-        internal Wind wind { get; private set; } // = new Wind() { };
+        internal Wind wind { get; private set; } 
 
         [BsonElement(elementName: "clouds")]
-        internal Clouds clouds { get; private set; } // = new Clouds() { };
+        internal Clouds clouds { get; private set; }
 
         internal WeatherObject(JObject json)
         {
@@ -81,7 +81,7 @@ namespace OpenWeatherHarvester.Schema
                 json["weather"][0]["id"].Value<string>(),
                 json["weather"][0]["main"].Value<string>(),
                 json["weather"][0]["description"].Value<string>(),
-                string.Format("{0}/{1}.png", baseIconUrl, iconCode) // set icon
+                string.Format("{0}/{1}.png", baseIconUrl, iconCode) // set icon url
                 );
 
             sys = new Sys(
