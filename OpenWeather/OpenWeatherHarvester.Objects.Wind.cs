@@ -5,8 +5,12 @@ namespace OpenWeatherHarvester.Objects
     [BsonIgnoreExtraElements]
     internal class Wind
     {
+        [BsonElement(elementName: "Speed")]
         internal int Speed { get; set; }
-        internal int Degree { get; set; }
-        internal Wind() { }
+
+        internal Wind(int speed)
+        {
+            Speed = speed;
+        }
     }
 }

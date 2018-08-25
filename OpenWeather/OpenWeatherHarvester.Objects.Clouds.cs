@@ -5,7 +5,12 @@ namespace OpenWeatherHarvester.Objects
     [BsonIgnoreExtraElements]
     internal class Clouds
     {
+        [BsonElement(elementName: "All")]
         internal int All { get; set; }
-        internal Clouds() { }
+
+        internal Clouds(int all)
+        {
+            All = all;
+        }
     }
 }

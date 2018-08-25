@@ -27,22 +27,22 @@ namespace OpenWeatherHarvester.Objects
         internal DateTime dateTime { get; private set; }
 
         [BsonElement(elementName: "coord")]
-        internal Coordinate coord { get; private set; } = new Coordinate();
+        internal Coordinate coord { get; private set; } //= new Coordinate() { };
 
         [BsonElement(elementName: "sys")]
-        internal Sys sys { get; private set; } = new Sys();
+        internal Sys sys { get; private set; } //= new Sys() { };
 
         [BsonElement(elementName: "Weather")]
-        internal Weather weather { get; private set; } = new Weather();
+        internal Weather weather { get; private set; } // = new Weather() { };
 
         [BsonElement(elementName: "main")]
-        internal Main main { get; private set; } = new Main();
+        internal Main main { get; private set; } // = new Main() { };
 
         [BsonElement(elementName: "wind")]
-        internal Wind wind { get; private set; } = new Wind();
+        internal Wind wind { get; private set; } // = new Wind() { };
 
         [BsonElement(elementName: "clouds")]
-        internal Clouds clouds { get; private set; } = new Clouds();
+        internal Clouds clouds { get; private set; } // = new Clouds() { };
 
         internal WeatherObject(JObject json)
         {
@@ -50,38 +50,53 @@ namespace OpenWeatherHarvester.Objects
         }
 
         private void _buildWeatherobjectFromWebResponse(JObject json)
-        {            
+        {
+            var baseIconUrl = string.Format("https://openweathermap.org/img/w"); // set icon
+            var iconCode = json["weather"][0]["icon"].Value<string>(); // set icon
+
             dateTime = TimeConverter.UtcToLocal(json["dt"].Value<double>());
             weather_id = json["id"].Value<string>();
             city = json["name"].Value<string>();
             code = json["cod"].Value<int>();
             @base = json["base"].Value<string>();
             visibility = json["visibility"].Value<int>();
-            main.Temp = json["main"]["temp"].Value<int>();
-            main.Pressure = json["main"]["pressure"].Value<int>();
-            main.Humidity = json["main"]["humidity"].Value<int>();
-            main.Temp_Min = json["main"]["temp_min"].Value<int>();
-            main.Temp_Max = json["main"]["temp_max"].Value<int>();
-            clouds.All = json["clouds"]["all"].Value<int>();
-            coord.Longitude = json["coord"]["lon"].Value<int>();
-            coord.Latitude = json["coord"]["lat"].Value<int>();
-            weather.Id = json["weather"]["id"].Value<int>();
-            weather.Main = json["weather"]["main"].Value<string>();
-            weather.Description = json["weather"]["description"].Value<string>();            
-            var baseIconUrl = string.Format("https://openweathermap.org/img/w/"); // set icon
-            var iconCode = json["weather"]["icon"].Value<string>(); // set icon
-            weather.Icon = string.Format("{0}/{1}.png", baseIconUrl, iconCode); // set icon
-            wind.Speed = json["wind"]["speed"].Value<int>();
-            wind.Degree = json["wind"]["deg"].Value<int>();
-            sys.Type = json["sys"]["type"].Value<int>();
-            sys.Id = json["sys"]["id"].Value<int>();
-            sys.Message = json["sys"]["mssage"].Value<int>();
-            sys.Country = json["sys"]["country"].Value<string>();
-            sys.Sunrise = json["sys"]["sunrise"].Value<string>();
-            sys.Sunset = json["sys"]["sunset"].Value<string>();
 
+            clouds = new Clouds(
+                json["clouds"]["all"].Value<int>()
+                );
+
+            wind = new Wind(
+                json["wind"]["speed"].Value<int>()
+                );
+
+            main = new Main(
+                json["main"]["temp"].Value<int>(),
+                json["main"]["pressure"].Value<int>(),
+                json["main"]["humidity"].Value<int>(),
+                json["main"]["temp_min"].Value<int>(),
+                json["main"]["temp_max"].Value<int>()
+                );
+
+            weather = new Weather(
+                json["weather"][0]["id"].Value<string>(),
+                json["weather"][0]["main"].Value<string>(),
+                json["weather"][0]["description"].Value<string>(),
+                string.Format("{0}/{1}.png", baseIconUrl, iconCode) // set icon
+                );
+
+            sys = new Sys(
+                json["sys"]["type"].Value<int>(),
+                json["sys"]["id"].Value<int>(),
+                json["sys"]["message"].Value<int>(),
+                json["sys"]["country"].Value<string>(),
+                TimeConverter.UtcToLocal(json["sys"]["sunrise"].Value<double>()),
+                TimeConverter.UtcToLocal(json["sys"]["sunset"].Value<double>())
+                );
+
+            coord = new Coordinate(
+                json["coord"]["lon"].Value<int>(),
+                json["coord"]["lat"].Value<int>()
+                );
         }
-
     }    
-
 }

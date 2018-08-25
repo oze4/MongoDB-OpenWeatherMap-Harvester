@@ -5,10 +5,24 @@ namespace OpenWeatherHarvester.Objects
     [BsonIgnoreExtraElements]
     internal class Weather
     {
-        internal int Id { get; set; }
+        [BsonElement(elementName: "Id")]
+        internal string Id { get; set; }
+
+        [BsonElement(elementName: "Main")]
         internal string Main { get; set; }
+
+        [BsonElement(elementName: "Description")]
         internal string Description { get; set; }
+
+        [BsonElement(elementName: "Icon")]
         internal string Icon { get; set; }
-        internal Weather() { }
+
+        internal Weather(string id, string main, string description, string icon)
+        {
+            Id = id;
+            Main = main;
+            Description = description;
+            Icon = icon;
+        }
     }
 }
