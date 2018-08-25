@@ -6,21 +6,21 @@ namespace OpenWeatherHarvester.Schema
     internal class Main
     {
         [BsonElement(elementName: "Temp")]
-        internal int Temp { get; set; }
+        internal float Temp { get; set; }
 
         [BsonElement(elementName: "Pressure")]
-        internal int Pressure { get; set; }
+        internal float Pressure { get; set; }
 
         [BsonElement(elementName: "Humidity")]
-        internal int Humidity { get; set; }
+        internal float Humidity { get; set; }
 
         [BsonElement(elementName: "Temp_Min")]
-        internal int Temp_Min { get; set; }
+        internal float Temp_Min { get; set; }
 
         [BsonElement(elementName: "Temp_Max")]
-        internal int Temp_Max { get; set; }
+        internal float Temp_Max { get; set; }
 
-        internal Main(int temp, int pressure, int humidity, int temp_min, int temp_max)
+        internal Main(float temp, float pressure, float humidity, float temp_min, float temp_max)
         {
             Temp = temp;
             Pressure = pressure;

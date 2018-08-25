@@ -70,11 +70,11 @@ namespace OpenWeatherHarvester.Schema
                 );
 
             main = new Main(
-                json["main"]["temp"].Value<int>(),
-                json["main"]["pressure"].Value<int>(),
-                json["main"]["humidity"].Value<int>(),
-                json["main"]["temp_min"].Value<int>(),
-                json["main"]["temp_max"].Value<int>()
+                json["main"]["temp"].Value<float>(),
+                json["main"]["pressure"].Value<float>(),
+                json["main"]["humidity"].Value<float>(),
+                json["main"]["temp_min"].Value<float>(),
+                json["main"]["temp_max"].Value<float>()
                 );
 
             weather = new Weather(
