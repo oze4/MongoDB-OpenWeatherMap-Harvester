@@ -68,17 +68,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="OpenWeatherHarvester.Schema.Clouds.cs" />
-    <Compile Include="OpenWeatherHarvester.Schema.Coordinate.cs" />
-    <Compile Include="OpenWeatherHarvester.Core.TimeConverter.cs" />
-    <Compile Include="OpenWeatherHarvester.Schema.Main.cs" />
+    <Compile Include="OpenWeatherHarvester.Core.cs" />
     <Compile Include="Old.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="OpenWeatherHarvester.Schema.Sys.cs" />
-    <Compile Include="OpenWeatherHarvester.Schema.Weather.cs" />
-    <Compile Include="OpenWeatherHarvester.Schema.WeatherObject.cs" />
-    <Compile Include="OpenWeatherHarvester.Schema.Wind.cs" />
+    <Compile Include="OpenWeatherHarvester.Schema.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
