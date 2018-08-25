@@ -1,4 +1,16 @@
-﻿using System;using System.IO;using System.Net;using System.Linq;using System.Threading;using MongoDB.Bson;using MongoDB.Bson.Serialization;using MongoDB.Driver;using System.Collections.Generic;using Newtonsoft.Json;using Newtonsoft.Json.Linq;namespace OpenWeatherHarvester
+﻿using System;
+using System.IO;
+using System.Net;
+using System.Linq;
+using System.Threading;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
+using MongoDB.Driver;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+
+namespace OpenWeatherHarvester
 {
     class Program
     {
@@ -21,13 +33,18 @@
             var un = "-";
             var pw = "-";
             var authDatabase = "-";
-            var mhosts = new string[] {                "1-:27017",                "2-:27017",                "3-:27017"               };
+            var mhosts = new string[]
+            {
+                "-:27017",
+                "-:27017",
+                "-:27017"
+            };
             var mongoHosts = string.Join(",", mhosts);
             var replicaSet = "-";
             var url = string.Format(
-             "mongodb://{0}:{1}@{2}/test?ssl=true&replicaSet={3}&authSource={4}&retryWrites=true",
-             un, pw, mongoHosts, replicaSet, authDatabase
-            );
+                "mongodb://{0}:{1}@{2}/test?ssl=true&replicaSet={3}&authSource={4}&retryWrites=true",
+                un, pw, mongoHosts, replicaSet, authDatabase
+                );
 
             var mongo = new MongoClient(url);
             var collection = mongo.GetDatabase("-").GetCollection<BsonDocument>("-");
@@ -64,5 +81,6 @@
             Console.ResetColor();
             Console.ReadLine();
         }
+    }
 
-    }}
+}
