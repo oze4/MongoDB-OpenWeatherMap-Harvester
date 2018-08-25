@@ -8,6 +8,9 @@ namespace OpenWeatherHarvester.Schema
     [BsonIgnoreExtraElements]
     internal class WeatherObject
     {
+        [BsonElement(elementName: "Timestamp")]
+        internal DateTime timestamp { get; private set; }
+
         [BsonElement(elementName: "weather_id")]
         internal string weather_id { get; private set; }
 
@@ -54,6 +57,7 @@ namespace OpenWeatherHarvester.Schema
             var baseIconUrl = string.Format("https://openweathermap.org/img/w"); // set icon
             var iconCode = json["weather"][0]["icon"].Value<string>(); // set icon
 
+            timestamp = DateTime.Now;
             dateTime = TimeConverter.UtcToLocal(json["dt"].Value<double>());
             weather_id = json["id"].Value<string>();
             city = json["name"].Value<string>();
