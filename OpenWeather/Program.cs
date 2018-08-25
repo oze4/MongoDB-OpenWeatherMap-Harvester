@@ -10,7 +10,7 @@
             // get weather 
             var webreq = WebRequest.Create("-%yourOpenWeatherQueryURL%-");            var webResponse = webreq.GetResponse();            var resp = new StreamReader(webResponse.GetResponseStream()).ReadToEnd();            JObject json = JObject.Parse(resp);            var wo = new WeatherObject(json);
 
-            //insert into mongo blah
+            //insert into mongo 
             BsonDocument doc = BsonSerializer.Deserialize<BsonDocument>(wo.ToBsonDocument());            collection.InsertOne(doc);
 
         }        private static List<WeatherObject> GetMongoWeather(IMongoClient mongo)        {
