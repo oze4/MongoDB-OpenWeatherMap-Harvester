@@ -8,7 +8,7 @@ using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
-using OpenWeatherHarvester.Objects;
+using OpenWeatherHarvester.Schema;
 
 namespace OpenWeatherHarvester
 {

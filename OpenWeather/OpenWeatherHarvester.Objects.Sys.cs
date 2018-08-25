@@ -1,7 +1,7 @@
 ﻿using System;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace OpenWeatherHarvester.Objects
+namespace OpenWeatherHarvester.Schema
 {
     [BsonIgnoreExtraElements]
     internal class Sys

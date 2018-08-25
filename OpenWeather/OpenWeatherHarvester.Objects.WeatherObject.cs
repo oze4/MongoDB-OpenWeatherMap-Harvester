@@ -3,7 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json.Linq;
 using OpenWeatherHarvester.Core;
 
-namespace OpenWeatherHarvester.Objects
+namespace OpenWeatherHarvester.Schema
 {
     [BsonIgnoreExtraElements]
     internal class WeatherObject
