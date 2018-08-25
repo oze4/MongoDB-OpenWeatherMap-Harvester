@@ -63,6 +63,7 @@ namespace OpenWeatherHarvester
 
         private void _buildWeatherobjectFromWebResponse(JObject json)
         {
+
             dateTime = _convertUTCtoLocalTime(json["dt"].Value<double>());
             weather_id = json["id"].Value<string>();
             city = json["name"].Value<string>();
@@ -91,62 +92,9 @@ namespace OpenWeatherHarvester
             sys.Country = json["sys"]["country"].Value<string>();
             sys.Sunrise = json["sys"]["sunrise"].Value<string>();
             sys.Sunset = json["sys"]["sunset"].Value<string>();
+
         }
-    }
 
-    [BsonIgnoreExtraElements]
-    internal class Coordinate
-    {
-        internal int Longitude { get; set; }
-        internal int Latitude { get; set; }
-        internal Coordinate() { }
-    }
+    }    
 
-    [BsonIgnoreExtraElements]
-    internal class Sys
-    {
-        internal int Type { get; set; }
-        internal int Id { get; set; }
-        internal int Message { get; set; }
-        internal string Country { get; set; }
-        internal string Sunrise { get; set; }
-        internal string Sunset { get; set; }
-        internal Sys() { }
-    }
-
-    [BsonIgnoreExtraElements]
-    internal class Weather
-    {
-        internal int Id { get; set; }
-        internal string Main { get; set; }
-        internal string Description { get; set; }
-        internal string Icon { get; set; }
-        internal Weather() { }
-    }
-
-    [BsonIgnoreExtraElements]
-    internal class Main
-    {
-        internal int Temp { get; set; }
-        internal int Pressure { get; set; }
-        internal int Humidity { get; set; }
-        internal int Temp_Min { get; set; }
-        internal int Temp_Max { get; set; }
-        internal Main() { }
-    }
-
-    [BsonIgnoreExtraElements]
-    internal class Wind
-    {
-        internal int Speed { get; set; }
-        internal int Degree { get; set; }
-        internal Wind() { }
-    }
-
-    [BsonIgnoreExtraElements]
-    internal class Clouds
-    {
-        internal int All { get; set; }
-        internal Clouds() { }
-    }
 }
