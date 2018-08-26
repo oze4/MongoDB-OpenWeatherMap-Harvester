@@ -56,11 +56,10 @@ namespace OpenWeatherHarvester.Schema
         {
             var baseIconUrl = string.Format("https://openweathermap.org/img/w"); // set icon
             var iconCode = json["weather"][0]["icon"].Value<string>(); // set icon            
-            var dtAsDateTime = TimeConverter.UtcToLocal(json["dt"].Value<double>());
             var sunrise_ = TimeConverter.UtcToLocal(json["sys"]["sunrise"].Value<double>());
             var sunset_ = TimeConverter.UtcToLocal(json["sys"]["sunset"].Value<double>());
 
-            dateTime = dtAsDateTime;
+            dateTime = TimeConverter.UtcToLocal(json["dt"].Value<double>());
             timestamp = DateTimeFactory.ConvertToTimestamp(DateTime.Now);
             weather_id = json["id"].Value<string>();
             city = json["name"].Value<string>();
