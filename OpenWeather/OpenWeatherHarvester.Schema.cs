@@ -9,7 +9,7 @@ namespace OpenWeatherHarvester.Schema
     internal class WeatherObject
     {
         [BsonElement(elementName: "Timestamp")]
-        internal DateTime timestamp { get; private set; }
+        internal string timestamp { get; private set; }
 
         [BsonElement(elementName: "weather_id")]
         internal string weather_id { get; private set; }
@@ -55,10 +55,13 @@ namespace OpenWeatherHarvester.Schema
         private void _buildWeatherobjectFromWebResponse(JObject json)
         {
             var baseIconUrl = string.Format("https://openweathermap.org/img/w"); // set icon
-            var iconCode = json["weather"][0]["icon"].Value<string>(); // set icon
-            //
-            dateTime = TimeConverter.UtcToLocal(json["dt"].Value<double>());
-            //
+            var iconCode = json["weather"][0]["icon"].Value<string>(); // set icon            
+            var dtAsDateTime = TimeConverter.UtcToLocal(json["dt"].Value<double>());
+            var sunrise_ = TimeConverter.UtcToLocal(json["sys"]["sunrise"].Value<double>());
+            var sunset_ = TimeConverter.UtcToLocal(json["sys"]["sunset"].Value<double>());
+
+            dateTime = dtAsDateTime;
+            timestamp = DateTimeFactory.ConvertToTimestamp(DateTime.Now);
             weather_id = json["id"].Value<string>();
             city = json["name"].Value<string>();
             code = json["cod"].Value<int>();
@@ -93,8 +96,8 @@ namespace OpenWeatherHarvester.Schema
                 json["sys"]["id"].Value<int>(),
                 json["sys"]["message"].Value<int>(),
                 json["sys"]["country"].Value<string>(),
-                TimeConverter.UtcToLocal(json["sys"]["sunrise"].Value<double>()),
-                TimeConverter.UtcToLocal(json["sys"]["sunset"].Value<double>())
+                DateTimeFactory.ConvertToTimestamp(sunrise_),
+                DateTimeFactory.ConvertToTimestamp(sunset_)
                 );
 
             coord = new Coordinate(
@@ -144,12 +147,12 @@ namespace OpenWeatherHarvester.Schema
         internal string Country { get; set; }
 
         [BsonElement(elementName: "Sunrise")]
-        internal DateTime Sunrise { get; set; }
+        internal string Sunrise { get; set; }
 
         [BsonElement(elementName: "Sunset")]
-        internal DateTime Sunset { get; set; }
+        internal string Sunset { get; set; }
 
-        internal Sys(int type, int id, int message, string country, DateTime sunrise, DateTime sunset)
+        internal Sys(int type, int id, int message, string country, string sunrise, string sunset)
         {
             Type = type;
             Id = id;

@@ -14,13 +14,17 @@ namespace OpenWeatherHarvester
 {
     class Program
     {
+        private static IMongoClient Mongo { get; set; } = new MongoClient();
+
         static void Main(string[] args)
         {
-            var pauseTime = new TimeSpan(0, 5, 0); // (hrs, mins, secs);
+            ConnectToMongo();
+            var pauseTime = new TimeSpan(0, 1, 0); // (hrs, mins, secs);
+
             for (int i = 0; i < 2;)
             {
-                Console.WriteLine("Gathering weather....");
-                GetHoustonUsWeather_AndSaveToMongo();
+                Console.WriteLine("Gather weather...");
+                Get_Weather_AndSaveToMongo();
                 Console.WriteLine("Pausing for " + pauseTime.TotalMinutes + " minutes, at: " + DateTime.Now.ToString("MM-dd-yyyy--hh:mm:sstt"));
                 Thread.Sleep(pauseTime);
             }
@@ -28,7 +32,7 @@ namespace OpenWeatherHarvester
             //FinishedRunning();
         }
 
-        private static void GetHoustonUsWeather_AndSaveToMongo()
+        private static void ConnectToMongo()
         {
             var un = "-";
             var pw = "-";
@@ -46,41 +50,38 @@ namespace OpenWeatherHarvester
                 un, pw, mongoHosts, replicaSet, authDatabase
                 );
 
-            var mongo = new MongoClient(url);
-            var collection = mongo.GetDatabase("-").GetCollection<BsonDocument>("-");
 
+            Mongo = new MongoClient(url);
+        }
 
+        private static void Get_Weather_AndSaveToMongo()
+        {
+            var collection = Mongo.GetDatabase("-").GetCollection<BsonDocument>("-");
             // get weather 
-            var webreq = WebRequest.Create("-%yourOpenWeatherQueryURL%-");
+            var webreq = WebRequest.Create("-");
             var webResponse = webreq.GetResponse();
             var resp = new StreamReader(webResponse.GetResponseStream()).ReadToEnd();
             JObject json = JObject.Parse(resp);
-
             var wo = new WeatherObject(json);
 
             //insert into mongo 
             BsonDocument doc = BsonSerializer.Deserialize<BsonDocument>(wo.ToBsonDocument());
             collection.InsertOne(doc);
-
         }
 
-        private static List<WeatherObject> GetMongoWeather(IMongoClient mongo)
+        private static void Get_SevenDayForecast_AndSaveToMongo()
         {
-            // grab all the shit again
-            var collection = mongo.GetDatabase("-").GetCollection<BsonDocument>("-");
-            var documents = collection.Find(Builders<BsonDocument>.Filter.Empty).ToList();
-            List<WeatherObject> woList = new List<WeatherObject>();
-            foreach (var doc_ in documents) woList.Add(BsonSerializer.Deserialize<WeatherObject>(doc_));
-            return woList;
-        }
+            var collection = Mongo.GetDatabase("-").GetCollection<BsonDocument>("-");
+            // get 7 day forecast
+            var webreq = WebRequest.Create("-");
+            var webResponse = webreq.GetResponse();
+            var resp = new StreamReader(webResponse.GetResponseStream()).ReadToEnd();
+            JObject json = JObject.Parse(resp);
+            var wo = new WeatherObject(json);
 
-        private static void FinishedRunning()
-        {
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("\r\n\r\n\r\nDone.");
-            Console.ResetColor();
-            Console.ReadLine();
+            //insert into mongo 
+            BsonDocument doc = BsonSerializer.Deserialize<BsonDocument>(wo.ToBsonDocument());
+            collection.InsertOne(doc);
         }
     }
-
 }
