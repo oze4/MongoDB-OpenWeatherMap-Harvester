@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
 
 // ~ UNDER CONSTRUCTION, BUILDING ENUM WITH LIKE 200K CITIES ~
 
