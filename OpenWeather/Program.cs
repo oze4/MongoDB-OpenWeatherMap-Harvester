@@ -1,14 +1,12 @@
 ﻿using System;
 using System.IO;
 using System.Net;
-using System.Linq;
 using System.Threading;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
-using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
-using OpenWeatherHarvester.Schema;
+using OpenWeatherHarvester.Schema.Objects;
 
 namespace OpenWeatherHarvester
 {

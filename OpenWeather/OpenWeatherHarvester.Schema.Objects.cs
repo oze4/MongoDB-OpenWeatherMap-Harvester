@@ -3,7 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json.Linq;
 using OpenWeatherHarvester.Core;
 
-namespace OpenWeatherHarvester.Schema
+namespace OpenWeatherHarvester.Schema.Objects
 {
     [BsonIgnoreExtraElements]
     internal class WeatherObject
@@ -33,16 +33,16 @@ namespace OpenWeatherHarvester.Schema
         internal Coordinate coord { get; private set; }
 
         [BsonElement(elementName: "sys")]
-        internal Sys sys { get; private set; } 
+        internal Sys sys { get; private set; }
 
         [BsonElement(elementName: "Weather")]
         internal Weather weather { get; private set; }
 
         [BsonElement(elementName: "main")]
-        internal Main main { get; private set; } 
+        internal Main main { get; private set; }
 
         [BsonElement(elementName: "wind")]
-        internal Wind wind { get; private set; } 
+        internal Wind wind { get; private set; }
 
         [BsonElement(elementName: "clouds")]
         internal Clouds clouds { get; private set; }
@@ -56,13 +56,11 @@ namespace OpenWeatherHarvester.Schema
         {
             var baseIconUrl = string.Format("https://openweathermap.org/img/w"); // set icon
             var iconCode = json["weather"][0]["icon"].Value<string>(); // set icon            
-            var dtAsDateTime = TimeConverter.UtcToLocal(json["dt"].Value<double>());
             var sunrise_ = TimeConverter.UtcToLocal(json["sys"]["sunrise"].Value<double>());
             var sunset_ = TimeConverter.UtcToLocal(json["sys"]["sunset"].Value<double>());
 
-            dateTime = dtAsDateTime;
+            dateTime = TimeConverter.UtcToLocal(json["dt"].Value<double>());
             timestamp = DateTimeFactory.ConvertToTimestamp(DateTime.Now);
-            weather_id = json["id"].Value<string>();
             city = json["name"].Value<string>();
             code = json["cod"].Value<int>();
             @base = json["base"].Value<string>();
