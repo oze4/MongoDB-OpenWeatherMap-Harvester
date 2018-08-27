@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
+// ~ UNDER CONSTRUCTION, BUILDING ENUM WITH LIKE 200K CITIES ~
+
 namespace OpenWeatherHarvester.Schema.Cities
 {
     internal class OpenWeatherHarvesterCity

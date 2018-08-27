@@ -70,7 +70,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="OpenWeatherHarvester.Core.cs" />
-    <Compile Include="Old.cs" />
     <Compile Include="OpenWeatherHarvester.Schema.Cities.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
