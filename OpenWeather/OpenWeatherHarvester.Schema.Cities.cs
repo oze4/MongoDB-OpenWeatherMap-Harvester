@@ -11,7 +11,6 @@ namespace OpenWeatherHarvester.Schema.Cities
 {
     internal class OpenWeatherHarvesterCity
     {
-
         internal OpenWeatherHarvesterCity(City city)
         {
             switch(city)
