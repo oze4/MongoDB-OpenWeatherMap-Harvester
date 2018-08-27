@@ -16,7 +16,7 @@ namespace OpenWeatherHarvester.Schema.Cities
             switch(city)
             {
                 case City.Houston_US:
-                    var message = "Credit rules, CASH drools :P";
+                    var message = "i";
                     for(int i = 1; i < 10; i++)
                     {
                         Console.WriteLine(message + "\r\n");
