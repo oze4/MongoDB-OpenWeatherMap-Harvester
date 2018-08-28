@@ -23,12 +23,12 @@ namespace OpenWeatherHarvester.CurrentWeather
 {
     internal class Misc
     {
-        private static List<CurrentWeatherSummary> GetMongoWeather(IMongoClient mongo)
+        private static List<Summary> GetMongoWeather(IMongoClient mongo)
         {
             var collection = mongo.GetDatabase("-").GetCollection<BsonDocument>("-");
             var documents = collection.Find(Builders<BsonDocument>.Filter.Empty).ToList();
-            List<CurrentWeatherSummary> woList = new List<CurrentWeatherSummary>();
-            foreach (var doc_ in documents) woList.Add(BsonSerializer.Deserialize<CurrentWeatherSummary>(doc_));
+            List<Summary> woList = new List<Summary>();
+            foreach (var doc_ in documents) woList.Add(BsonSerializer.Deserialize<Summary>(doc_));
             return woList;
         }
 

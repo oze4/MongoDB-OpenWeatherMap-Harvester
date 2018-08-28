@@ -21,7 +21,7 @@ using OpenWeatherHarvester.City;
 namespace OpenWeatherHarvester.CurrentWeather
 {
     [BsonIgnoreExtraElements]
-    internal class CurrentWeatherSummary
+    internal class Summary
     {
         [BsonElement(elementName: "Timestamp")]
         internal string Timestamp { get; private set; }
@@ -51,10 +51,10 @@ namespace OpenWeatherHarvester.CurrentWeather
         internal Sys Sys { get; private set; }
 
         [BsonElement(elementName: "Weather")]
-        internal CurrentWeatherDescription Weather { get; private set; }
+        internal DescriptionInfo Weather { get; private set; }
 
         [BsonElement(elementName: "Main")]
-        internal CurrentWeatherMeasurements Main { get; private set; }
+        internal Measurements Main { get; private set; }
 
         [BsonElement(elementName: "Wind")]
         internal Wind Wind { get; private set; }
@@ -62,7 +62,7 @@ namespace OpenWeatherHarvester.CurrentWeather
         [BsonElement(elementName: "Clouds")]
         internal Clouds Clouds { get; private set; }
 
-        internal CurrentWeatherSummary(JObject json)
+        internal Summary(JObject json)
         {
             InitializeObject(json);
         }
@@ -89,7 +89,7 @@ namespace OpenWeatherHarvester.CurrentWeather
                 json["wind"]["speed"].Value<int>()
                 );
 
-            Main = new CurrentWeatherMeasurements(
+            Main = new Measurements(
                 json["main"]["temp"].Value<float>(),
                 json["main"]["pressure"].Value<float>(),
                 json["main"]["humidity"].Value<float>(),
@@ -97,7 +97,7 @@ namespace OpenWeatherHarvester.CurrentWeather
                 json["main"]["temp_max"].Value<float>()
                 );
 
-            Weather = new CurrentWeatherDescription(
+            Weather = new DescriptionInfo(
                 json["weather"][0]["id"].Value<string>(),
                 json["weather"][0]["main"].Value<string>(),
                 json["weather"][0]["description"].Value<string>(),

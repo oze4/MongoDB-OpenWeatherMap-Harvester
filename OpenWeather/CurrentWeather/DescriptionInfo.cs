@@ -18,7 +18,7 @@ namespace OpenWeatherHarvester.CurrentWeather
 {
 
     [BsonIgnoreExtraElements]
-    internal class CurrentWeatherDescription
+    internal class DescriptionInfo
     {
         [BsonElement(elementName: "Id")]
         internal string Id { get; set; }
@@ -32,7 +32,7 @@ namespace OpenWeatherHarvester.CurrentWeather
         [BsonElement(elementName: "Icon")]
         internal string Icon { get; set; }
 
-        internal CurrentWeatherDescription(string id, string main, string description, string icon)
+        internal DescriptionInfo(string id, string main, string description, string icon)
         {
             Id = id;
             Main = main;

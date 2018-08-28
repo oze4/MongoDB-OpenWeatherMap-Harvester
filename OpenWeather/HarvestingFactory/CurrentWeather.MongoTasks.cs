@@ -32,7 +32,7 @@ namespace OpenWeatherHarvester.HarvestingFactory.CurrentWeather
             var webResponse = webreq.GetResponse();
             var resp = new StreamReader(webResponse.GetResponseStream()).ReadToEnd();
             JObject json = JObject.Parse(resp);
-            var wo = new CurrentWeatherSummary(json);
+            var wo = new Summary(json);
 
             //insert into mongo 
             BsonDocument doc = BsonSerializer.Deserialize<BsonDocument>(wo.ToBsonDocument());
@@ -47,7 +47,7 @@ namespace OpenWeatherHarvester.HarvestingFactory.CurrentWeather
             var webResponse = webreq.GetResponse();
             var resp = new StreamReader(webResponse.GetResponseStream()).ReadToEnd();
             JObject json = JObject.Parse(resp);
-            var wo = new CurrentWeatherSummary(json);
+            var wo = new Summary(json);
 
             //insert into mongo 
             BsonDocument doc = BsonSerializer.Deserialize<BsonDocument>(wo.ToBsonDocument());

@@ -18,7 +18,7 @@ namespace OpenWeatherHarvester.CurrentWeather
 {
 
     [BsonIgnoreExtraElements]
-    internal class CurrentWeatherMeasurements
+    internal class Measurements
     {
         [BsonElement(elementName: "Temp")]
         internal float Temp { get; set; }
@@ -35,7 +35,7 @@ namespace OpenWeatherHarvester.CurrentWeather
         [BsonElement(elementName: "Temp_Max")]
         internal float Temp_Max { get; set; }
 
-        internal CurrentWeatherMeasurements(float temp, float pressure, float humidity, float temp_min, float temp_max)
+        internal Measurements(float temp, float pressure, float humidity, float temp_min, float temp_max)
         {
             Temp = temp;
             Pressure = pressure;
