@@ -1,37 +1,53 @@
-﻿using System;
-using System.IO;
-using System.Net;
+﻿/*
+
+
+                                
+                     _|      _|       _|_|_|_|_|    
+                     _|_|  _|_|     _|          _|  
+                     _|  _|  _|   _|    _|_|_|  _|  
+                     _|      _|   _|  _|    _|  _|  
+                     _|      _|   _|    _|_|_|_|    
+                                    _|              
+                                      _|_|_|_|_|_|  
+
+
+*/
+
+using System;
 using System.Threading;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization;
-using MongoDB.Driver;
-using OpenWeatherHarvester.Core;
-using Newtonsoft.Json.Linq;
-using OpenWeatherHarvester.Schema.Objects;
+using System.Collections.Generic;
+using OpenWeatherHarvester.Mongo;
 
 namespace OpenWeatherHarvester
 {
     class Program
     {
-        // ICK.. 
-
-        // THIS IS UNDER CONSTRUCTION AS WELL...
-
-        //
-        private static IMongoClient Mongo { get; set; } = new MongoClient();
+        //TODO: 
+            // THIS IS UNDER CONSTRUCTION AS WELL... //        
 
         static void Main(string[] args)
         {
-            Mongo = new MongoDBWeatherFactory().ConnectToMongo();
-            var pauseTime = new TimeSpan(0, 1, 0); // (hrs, mins, secs);
+            var mongo_connection = new MongoConnection(
+                "myUn",
+                "myPw",
+                "admin", // most likely the database you'll be using to auth //
+                new List<string>() { 
+                    "My-Mongo-Server-01",
+                    "My-Mongo-Server-02", // even if you have only 1 server you want to connect to, it has to be a list //
+                    "My-Mongo-Server-03"
+                    },
+                "27017", // most likely the port you will be using //
+                true, // use SSL //
+                "" // my-replica-set // (mainly for Mongo Atlas users //
+                );
 
+            
+            var pauseTime = new TimeSpan(0, 1, 0); // (hrs, mins, secs); //
             for (string exit = "No"; exit != "Yes";)
             {
                 try
                 {
                     Console.WriteLine("Gather weather...");
-                    MongoDBWeatherFactory.Get_Weather_AndSaveToMongo(Mongo);
-                    MongoDBWeatherFactory.Get_SevenDayForecast_AndSaveToMongo(Mongo);
 
                     Console.WriteLine(
                         "Pausing for " +
@@ -45,7 +61,7 @@ namespace OpenWeatherHarvester
                 catch
                 {
                     exit = "Yes";
-                }
+                }    
             }
         }
     }
