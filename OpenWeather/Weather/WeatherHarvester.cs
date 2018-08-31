@@ -20,9 +20,9 @@ using csOpenWeather.Weather;
 
 namespace csOpenWeather
 {
-    internal class WeatherHarvester
+    class WeatherHarvester
     {
-        internal static CurrentWeather GetCurrentWeather(City city, string apiToken)
+        public static CurrentWeather GetCurrentWeather(City city, string apiToken)
         {
             var url = string.Format(
                 "http://api.openweathermap.org/data/2.5/weather?id={0}&appid={1}&units=imperial", (int)city, apiToken
