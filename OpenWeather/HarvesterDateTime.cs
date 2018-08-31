@@ -7,8 +7,8 @@ namespace csOpenWeather
     {
         internal DateTime DateTime { get; set; }
 
-        internal HarvesterDateTime()
-            : this((DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds)
+        internal HarvesterDateTime() 
+            : this((DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalSeconds)
         {
         }
 

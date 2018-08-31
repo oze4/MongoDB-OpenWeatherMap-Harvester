@@ -20,8 +20,8 @@ namespace csOpenWeather.Weather
     [BsonIgnoreExtraElements]
     internal class CurrentWeather
     {
-        [BsonElement(elementName: "InternalTimestamp")]
-        internal HarvesterDateTime InternalTimestamp { get; private set; }
+        [BsonElement(elementName: "csTimestamp")]
+        internal HarvesterDateTime CsTimestamp { get; private set; }
 
         [BsonElement(elementName: "WeatherId")]
         internal string WeatherId { get; private set; }
@@ -75,7 +75,7 @@ namespace csOpenWeather.Weather
             Clouds clouds
             )
         {
-            InternalTimestamp = internaltimestamp;
+            CsTimestamp = internaltimestamp;
             WeatherId = weather_id;
             CityName = cityname;
             Code = code;

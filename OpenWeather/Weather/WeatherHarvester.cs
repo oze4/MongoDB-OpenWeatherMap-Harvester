@@ -33,7 +33,7 @@ namespace csOpenWeather
             JObject json = JObject.Parse(resp);
 
             var _weatherid = json["weather"][0]["id"].Value<string>();
-            var _internaltimestamp = new HarvesterDateTime(); // returns now as utc double
+            var _cstimestamp = new HarvesterDateTime(); // returns now as utc double
             var _city = json["name"].Value<string>();
             var _code = json["cod"].Value<int>();
             var _visibility = json["visibility"].Value<int>();
@@ -74,7 +74,7 @@ namespace csOpenWeather
                 );
 
             return new CurrentWeather(
-                _internaltimestamp, 
+                _cstimestamp, 
                 _weatherid, 
                 _city, 
                 _code, 
