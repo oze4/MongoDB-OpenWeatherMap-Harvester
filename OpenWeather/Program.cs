@@ -19,10 +19,7 @@ using System;
 namespace csOpenWeather
 {
     class Program
-    {
-        //TODO: 
-            // THIS IS UNDER CONSTRUCTION AS WELL... //        
-            
+    {            
         static void Main(string[] args)
         {
             var houston_weather = WeatherHarvester.GetCurrentWeather(City.Houston_US, "9d6e842241161dffa8f9963157efeded");

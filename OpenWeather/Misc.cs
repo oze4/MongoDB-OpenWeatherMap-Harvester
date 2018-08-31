@@ -33,14 +33,6 @@ namespace csOpenWeather
             return woList;
         }
 
-        private static void FinishedRunning()
-        {
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("\r\n\r\n\r\nDone.");
-            Console.ResetColor();
-            Console.ReadLine();
-        }
-
         private static void _how_to_connect_to_mongo_old()
         {
             /*
