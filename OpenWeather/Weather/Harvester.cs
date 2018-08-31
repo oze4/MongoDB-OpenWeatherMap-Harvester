@@ -12,62 +12,21 @@
 
 
 */
-
-using System;
-using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson;
+using MongoDB.Driver;
 using Newtonsoft.Json.Linq;
-using OpenWeatherHarvester.City;
+using System.IO;
+using System.Net;
 
-namespace OpenWeatherHarvester.CurrentWeather
+namespace OpenWeatherHarvester.Weather
 {
-    [BsonIgnoreExtraElements]
-    internal class Summary
+    internal class Harvester
     {
-        [BsonElement(elementName: "Timestamp")]
-        internal string Timestamp { get; private set; }
+        private readonly string Url;
 
-        [BsonElement(elementName: "WeatherId")]
-        internal string WeatherId { get; private set; }
 
-        [BsonElement(elementName: "City")]
-        internal string City { get; private set; }
-
-        [BsonElement(elementName: "Code")]
-        internal int Code { get; private set; }
-
-        [BsonElement(elementName: "Visibility")]
-        internal int Visibility { get; private set; }
-
-        [BsonElement(elementName: "Base")]
-        internal string Base { get; private set; }
-
-        [BsonElement(elementName: "DateTime")]
-        internal DateTime DateTime { get; private set; }
-
-        [BsonElement(elementName: "Coordinates")]
-        internal Coordinate Coordinates { get; private set; }
-
-        [BsonElement(elementName: "Sys")]
-        internal Sys Sys { get; private set; }
-
-        [BsonElement(elementName: "Weather")]
-        internal DescriptionInfo Weather { get; private set; }
-
-        [BsonElement(elementName: "Main")]
-        internal Measurements Main { get; private set; }
-
-        [BsonElement(elementName: "Wind")]
-        internal Wind Wind { get; private set; }
-
-        [BsonElement(elementName: "Clouds")]
-        internal Clouds Clouds { get; private set; }
-
-        internal Summary(JObject json)
-        {
-            InitializeObject(json);
-        }
-
-        private void InitializeObject(JObject json)
+        /*
+        private CurrentWeatherSummary InitializeObject(JObject json)
         {
             var baseIconUrl = string.Format("https://openweathermap.org/img/w"); // set icon
             var iconCode = json["weather"][0]["icon"].Value<string>(); // set icon            
@@ -97,14 +56,14 @@ namespace OpenWeatherHarvester.CurrentWeather
                 json["main"]["temp_max"].Value<float>()
                 );
 
-            Weather = new DescriptionInfo(
+            Weather = new CurrentWeatherDescription(
                 json["weather"][0]["id"].Value<string>(),
                 json["weather"][0]["main"].Value<string>(),
                 json["weather"][0]["description"].Value<string>(),
                 string.Format("{0}/{1}.png", baseIconUrl, iconCode) // set icon url
                 );
 
-            Sys = new Sys(
+            Sys = new Sun(
                 json["sys"]["type"].Value<int>(),
                 json["sys"]["id"].Value<int>(),
                 json["sys"]["message"].Value<int>(),
@@ -117,7 +76,39 @@ namespace OpenWeatherHarvester.CurrentWeather
                 json["coord"]["lon"].Value<int>(),
                 json["coord"]["lat"].Value<int>()
                 );
-        }
+        }*/
     }
 
+    class MongoTasks
+    {
+        internal static void Get_Weather_AndSaveToMongo(IMongoClient mongo)
+        {
+            var collection = mongo.GetDatabase("-").GetCollection<BsonDocument>("-");
+            // get weather 
+            var webreq = WebRequest.Create("-");
+            var webResponse = webreq.GetResponse();
+            var resp = new StreamReader(webResponse.GetResponseStream()).ReadToEnd();
+            JObject json = JObject.Parse(resp);
+            //var wo = new CurrentWeatherSummary(json);
+
+            //insert into mongo 
+           // BsonDocument doc = BsonSerializer.Deserialize<BsonDocument>(wo.ToBsonDocument());
+           // collection.InsertOne(doc);
+        }
+
+        internal static void Get_SevenDayForecast_AndSaveToMongo(IMongoClient mongo)
+        {
+            var collection = mongo.GetDatabase("-").GetCollection<BsonDocument>("-");
+            // get 7 day forecast
+            var webreq = WebRequest.Create("-");
+            var webResponse = webreq.GetResponse();
+            var resp = new StreamReader(webResponse.GetResponseStream()).ReadToEnd();
+            JObject json = JObject.Parse(resp);
+           // var wo = new CurrentWeatherSummary(json);
+
+            //insert into mongo 
+            //BsonDocument doc = BsonSerializer.Deserialize<BsonDocument>(wo.ToBsonDocument());
+            //collection.InsertOne(doc);
+        }
+    }
 }

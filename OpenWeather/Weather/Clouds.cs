@@ -12,20 +12,21 @@
 
 
 */
+
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace OpenWeatherHarvester.CurrentWeather
+namespace OpenWeatherHarvester.Weather
 {
 
     [BsonIgnoreExtraElements]
-    internal class Wind
+    internal class Clouds
     {
-        [BsonElement(elementName: "Speed")]
-        internal int Speed { get; set; }
+        [BsonElement(elementName: "CloudCoverPercentage")]
+        internal int CloudCoverPercentage { get; set; }
 
-        internal Wind(int speed)
+        internal Clouds(int cloudcoverpercentage)
         {
-            Speed = speed;
+            CloudCoverPercentage = cloudcoverpercentage;
         }
     }
 }

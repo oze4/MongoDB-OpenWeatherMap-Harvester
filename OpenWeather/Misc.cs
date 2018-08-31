@@ -18,17 +18,18 @@ using System.Linq;
 using MongoDB.Driver;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
+using OpenWeatherHarvester.Weather;
 
-namespace OpenWeatherHarvester.CurrentWeather
+namespace OpenWeatherHarvester
 {
     internal class Misc
     {
-        private static List<Summary> GetMongoWeather(IMongoClient mongo)
+        private static List<CurrentWeather> GetMongoWeather(IMongoClient mongo)
         {
             var collection = mongo.GetDatabase("-").GetCollection<BsonDocument>("-");
             var documents = collection.Find(Builders<BsonDocument>.Filter.Empty).ToList();
-            List<Summary> woList = new List<Summary>();
-            foreach (var doc_ in documents) woList.Add(BsonSerializer.Deserialize<Summary>(doc_));
+            List<CurrentWeather> woList = new List<CurrentWeather>();
+            foreach (var doc_ in documents) woList.Add(BsonSerializer.Deserialize<CurrentWeather>(doc_));
             return woList;
         }
 

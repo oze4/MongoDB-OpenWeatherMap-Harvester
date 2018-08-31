@@ -17,7 +17,7 @@ using System.Collections.Generic;
 
 namespace OpenWeatherHarvester.Mongo
 {
-    internal class MongoConnection
+    internal class MongoConnection : MongoClient
     {                
         private IMongoClient MongoClient { get; set; }
         private string Username { get; set; }
@@ -49,6 +49,10 @@ namespace OpenWeatherHarvester.Mongo
                 un, pw, mongoHostsString, useSslString, replicaSet, authenticationDatabase
                 )
             );
+        }
+
+        public MongoConnection()
+        {
         }
     }
 }

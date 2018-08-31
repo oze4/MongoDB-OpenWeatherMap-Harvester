@@ -12,21 +12,24 @@
 
 
 */
-
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace OpenWeatherHarvester.CurrentWeather
+namespace OpenWeatherHarvester.Weather
 {
 
     [BsonIgnoreExtraElements]
-    internal class Clouds
+    internal class Wind
     {
-        [BsonElement(elementName: "All")]
-        internal int All { get; set; }
+        [BsonElement(elementName: "Speed")]
+        internal float Speed { get; set; }
 
-        internal Clouds(int all)
+        [BsonElement(elementName: "DirectionDegree")]
+        internal float DirectionDegree { get; set; }
+
+        internal Wind(float speed, float deg)
         {
-            All = all;
+            Speed = speed;
+            DirectionDegree = deg;
         }
     }
 }

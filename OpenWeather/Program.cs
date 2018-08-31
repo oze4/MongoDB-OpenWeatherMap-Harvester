@@ -13,10 +13,6 @@
 
 */
 
-using System;
-using System.Threading;
-using System.Collections.Generic;
-using OpenWeatherHarvester.Mongo;
 
 namespace OpenWeatherHarvester
 {
@@ -24,9 +20,11 @@ namespace OpenWeatherHarvester
     {
         //TODO: 
             // THIS IS UNDER CONSTRUCTION AS WELL... //        
-
+            
         static void Main(string[] args)
         {
+            
+            /*
             var mongo_connection = new MongoConnection(
                 "myUn",
                 "myPw",
@@ -62,7 +60,7 @@ namespace OpenWeatherHarvester
                 {
                     exit = "Yes";
                 }    
-            }
+            }*/
         }
     }
 }

@@ -14,29 +14,29 @@
 */
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace OpenWeatherHarvester.CurrentWeather
+namespace OpenWeatherHarvester.Weather
 {
 
     [BsonIgnoreExtraElements]
-    internal class DescriptionInfo
+    internal class Conditions
     {
         [BsonElement(elementName: "Id")]
         internal string Id { get; set; }
 
-        [BsonElement(elementName: "Main")]
-        internal string Main { get; set; }
+        [BsonElement(elementName: "GeneralDescription")]
+        internal string GeneralDescription { get; set; }
 
-        [BsonElement(elementName: "Description")]
-        internal string Description { get; set; }
+        [BsonElement(elementName: "DetailedDescription")]
+        internal string DetailedDescription { get; set; }
 
         [BsonElement(elementName: "Icon")]
         internal string Icon { get; set; }
 
-        internal DescriptionInfo(string id, string main, string description, string icon)
+        internal Conditions(string id, string generalDescription, string detailedDescription, string icon)
         {
             Id = id;
-            Main = main;
-            Description = description;
+            GeneralDescription = generalDescription;
+            DetailedDescription = detailedDescription;
             Icon = icon;
         }
     }
