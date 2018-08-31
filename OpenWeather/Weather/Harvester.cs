@@ -19,12 +19,13 @@ using csOpenWeather.Locations;
 
 namespace csOpenWeather.Weather
 {
-    internal class Harvester
+    internal class WeatherHarvester
     {
-        internal CurrentWeather GetCurrentWeather(City city, string apiToken)
+        internal static CurrentWeather GetCurrentWeather(City city, string apiToken)
         {
+            var _city_ = (int)city;
             var url = string.Format(
-                "http://api.openweathermap.org/data/2.5/weather?id={0}&appid={1}&units=imperial", city, apiToken
+                "http://api.openweathermap.org/data/2.5/weather?id={0}&appid={1}&units=imperial", _city_, apiToken
                 );
             var webreq = WebRequest.Create(url);
             var webResponse = webreq.GetResponse();

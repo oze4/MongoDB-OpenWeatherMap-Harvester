@@ -48,10 +48,10 @@ namespace csOpenWeather.Weather
         internal Coordinate Coordinates { get; private set; }
 
         [BsonElement(elementName: "Conditions")]
-        internal Conditions Weather { get; private set; }
+        internal Conditions Conditions { get; private set; }
 
         [BsonElement(elementName: "Main")]
-        internal Climate Main { get; private set; }
+        internal Climate Climate { get; private set; }
 
         [BsonElement(elementName: "Wind")]
         internal Wind Wind { get; private set; }
@@ -84,8 +84,8 @@ namespace csOpenWeather.Weather
             Coordinates = coordinates;
             Sunrise = sunrise;
             Sunset = sunset;
-            Weather = conditions;
-            Main = climate;
+            Conditions = conditions;
+            Climate = climate;
             Wind = wind;
             Clouds = clouds;
         }
