@@ -22,7 +22,7 @@ namespace csOpenWeather
     {            
         static void Main(string[] args)
         {
-            var houston_weather = WeatherHarvester.GetCurrentWeather(City.Houston_US, "9d6e842241161dffa8f9963157efeded");
+            var houston_weather = WeatherHarvester.GetCurrentWeather(City.Houston_US, "-");
             Console.WriteLine(houston_weather.Conditions.GeneralDescription);
             Console.WriteLine("\r\nDone.\r\n");
             Console.ReadLine();
