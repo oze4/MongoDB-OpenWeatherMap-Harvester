@@ -72,7 +72,6 @@
     <Compile Include="Weather\Harvester.cs" />
     <Compile Include="Weather\Clouds.cs" />
     <Compile Include="Weather\Coordinate.cs" />
-    <Compile Include="DateTimeFactory.cs" />
     <Compile Include="Weather\Climate.cs" />
     <Compile Include="Mongo\MongoConnection.cs" />
     <Compile Include="Misc.cs" />
