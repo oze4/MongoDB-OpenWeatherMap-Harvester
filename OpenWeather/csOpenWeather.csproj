@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{4B097B15-A5E8-4585-A6B7-4963984812CF}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>OpenWeatherHarvester</RootNamespace>
-    <AssemblyName>OpenWeatherHarvester</AssemblyName>
+    <RootNamespace>csOpenWeather</RootNamespace>
+    <AssemblyName>csOpenWeather</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

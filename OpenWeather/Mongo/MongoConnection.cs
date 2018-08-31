@@ -15,7 +15,7 @@
 using MongoDB.Driver;
 using System.Collections.Generic;
 
-namespace OpenWeatherHarvester.Mongo
+namespace csOpenWeather.Mongo
 {
     internal class MongoConnection : MongoClient
     {                

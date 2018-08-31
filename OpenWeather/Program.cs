@@ -14,7 +14,7 @@
 */
 
 
-namespace OpenWeatherHarvester
+namespace csOpenWeather
 {
     class Program
     {

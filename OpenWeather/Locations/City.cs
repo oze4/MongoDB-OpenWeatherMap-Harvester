@@ -13,7 +13,7 @@
 
 */
 
-namespace OpenWeatherHarvester.Locations
+namespace csOpenWeather.Locations
 {
     internal enum City
     {

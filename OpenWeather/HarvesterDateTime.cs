@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OpenWeatherHarvester
+namespace csOpenWeather
 {
 
     internal class HarvesterDateTime

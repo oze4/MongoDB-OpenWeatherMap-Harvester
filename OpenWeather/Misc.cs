@@ -18,9 +18,9 @@ using System.Linq;
 using MongoDB.Driver;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
-using OpenWeatherHarvester.Weather;
+using csOpenWeather.Weather;
 
-namespace OpenWeatherHarvester
+namespace csOpenWeather
 {
     internal class Misc
     {
