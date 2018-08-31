@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2018
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenWeather", "OpenWeather\OpenWeather.csproj", "{4B097B15-A5E8-4585-A6B7-4963984812CF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "csOpenWeather", "OpenWeather\csOpenWeather.csproj", "{4B097B15-A5E8-4585-A6B7-4963984812CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
