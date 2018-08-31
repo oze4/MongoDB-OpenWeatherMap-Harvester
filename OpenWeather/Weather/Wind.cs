@@ -18,15 +18,15 @@ namespace csOpenWeather.Weather
 {
 
     [BsonIgnoreExtraElements]
-    internal class Wind
+    public class Wind
     {
         [BsonElement(elementName: "Speed")]
-        internal float Speed { get; set; }
+        public float Speed { get; set; }
 
         [BsonElement(elementName: "DirectionDegree")]
-        internal float DirectionDegree { get; set; }
+        public float DirectionDegree { get; set; }
 
-        internal Wind(float speed, float deg)
+        public Wind(float speed, float deg)
         {
             Speed = speed;
             DirectionDegree = deg;

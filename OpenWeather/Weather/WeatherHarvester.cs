@@ -20,7 +20,7 @@ using csOpenWeather.Weather;
 
 namespace csOpenWeather
 {
-    class WeatherHarvester
+    public static class WeatherHarvester
     {
         public static CurrentWeather GetCurrentWeather(City city, string apiToken)
         {

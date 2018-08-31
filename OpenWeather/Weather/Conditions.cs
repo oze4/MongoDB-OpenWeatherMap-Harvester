@@ -18,21 +18,21 @@ namespace csOpenWeather.Weather
 {
 
     [BsonIgnoreExtraElements]
-    internal class Conditions
+    public class Conditions
     {
         [BsonElement(elementName: "Id")]
-        internal string Id { get; set; }
+        public string Id { get; set; }
 
         [BsonElement(elementName: "GeneralDescription")]
-        internal string GeneralDescription { get; set; }
+        public string GeneralDescription { get; set; }
 
         [BsonElement(elementName: "DetailedDescription")]
-        internal string DetailedDescription { get; set; }
+        public string DetailedDescription { get; set; }
 
         [BsonElement(elementName: "Icon")]
-        internal string Icon { get; set; }
+        public string Icon { get; set; }
 
-        internal Conditions(string id, string generalDescription, string detailedDescription, string icon)
+        public Conditions(string id, string generalDescription, string detailedDescription, string icon)
         {
             Id = id;
             GeneralDescription = generalDescription;

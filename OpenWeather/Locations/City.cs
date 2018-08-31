@@ -15,7 +15,7 @@
 
 namespace csOpenWeather.Locations
 {
-    internal enum City
+    public enum City
     {
         A_Coruna_ES = 3119841,
         A_Estrada_ES = 3119746,

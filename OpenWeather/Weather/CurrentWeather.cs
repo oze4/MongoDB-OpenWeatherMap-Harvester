@@ -18,48 +18,48 @@ using MongoDB.Bson.Serialization.Attributes;
 namespace csOpenWeather.Weather
 {
     [BsonIgnoreExtraElements]
-    internal class CurrentWeather
+    public class CurrentWeather
     {
         [BsonElement(elementName: "csTimestamp")]
-        internal HarvesterDateTime CsTimestamp { get; private set; }
+        public HarvesterDateTime CsTimestamp { get; private set; }
 
         [BsonElement(elementName: "WeatherId")]
-        internal string WeatherId { get; private set; }
+        public string WeatherId { get; private set; }
 
         [BsonElement(elementName: "CityName")]
-        internal string CityName { get; private set; }
+        public string CityName { get; private set; }
 
         [BsonElement(elementName: "Code")]
-        internal int Code { get; private set; }
+        public int Code { get; private set; }
 
         [BsonElement(elementName: "Visibility")]
-        internal int Visibility { get; private set; }
+        public int Visibility { get; private set; }
 
         [BsonElement(elementName: "Sunrise")]
-        internal HarvesterDateTime Sunrise { get; private set; }
+        public HarvesterDateTime Sunrise { get; private set; }
 
         [BsonElement(elementName: "Sunset")]
-        internal HarvesterDateTime Sunset { get; private set; }
+        public HarvesterDateTime Sunset { get; private set; }
 
         [BsonElement(elementName: "DateTimeOfWeatherCalculation")]
-        internal HarvesterDateTime DateTimeOfWeatherCalculation { get; private set; }
+        public HarvesterDateTime DateTimeOfWeatherCalculation { get; private set; }
 
         [BsonElement(elementName: "Coordinates")]
-        internal Coordinate Coordinates { get; private set; }
+        public Coordinate Coordinates { get; private set; }
 
         [BsonElement(elementName: "Conditions")]
-        internal Conditions Conditions { get; private set; }
+        public Conditions Conditions { get; private set; }
 
         [BsonElement(elementName: "Main")]
-        internal Climate Climate { get; private set; }
+        public Climate Climate { get; private set; }
 
         [BsonElement(elementName: "Wind")]
-        internal Wind Wind { get; private set; }
+        public Wind Wind { get; private set; }
 
         [BsonElement(elementName: "Clouds")]
-        internal Clouds Clouds { get; private set; }
+        public Clouds Clouds { get; private set; }
 
-        internal CurrentWeather(
+        public CurrentWeather(
             HarvesterDateTime internaltimestamp,
             string weather_id,
             string cityname,

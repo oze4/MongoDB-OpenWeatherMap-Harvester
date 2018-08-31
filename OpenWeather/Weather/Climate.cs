@@ -17,24 +17,24 @@ using MongoDB.Bson.Serialization.Attributes;
 namespace csOpenWeather.Weather
 {
     [BsonIgnoreExtraElements]
-    internal class Climate
+    public class Climate
     {
         [BsonElement(elementName: "Temperature")]
-        internal float Temperature { get; set; }
+        public float Temperature { get; set; }
 
         [BsonElement(elementName: "Pressure")]
-        internal float Pressure { get; set; }
+        public float Pressure { get; set; }
 
         [BsonElement(elementName: "Humidity")]
-        internal float Humidity { get; set; }
+        public float Humidity { get; set; }
 
         [BsonElement(elementName: "MinimumTemperature")]
-        internal float MinimumTemperature { get; set; }
+        public float MinimumTemperature { get; set; }
 
         [BsonElement(elementName: "MaximumTemperature")]
-        internal float MaximumTemperature { get; set; }
+        public float MaximumTemperature { get; set; }
 
-        internal Climate(float temp, float pressure, float humidity, float temp_min, float temp_max)
+        public Climate(float temp, float pressure, float humidity, float temp_min, float temp_max)
         {
             Temperature = temp;
             Pressure = pressure;

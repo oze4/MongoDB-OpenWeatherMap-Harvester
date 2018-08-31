@@ -19,15 +19,15 @@ namespace csOpenWeather.Weather
 {
 
     [BsonIgnoreExtraElements]
-    internal class Coordinate
+    public class Coordinate
     {
         [BsonElement(elementName: "Longitude")]
-        internal int Longitude { get; set; }
+        public int Longitude { get; set; }
 
         [BsonElement(elementName: "Latitude")]
-        internal int Latitude { get; set; }
+        public int Latitude { get; set; }
 
-        internal Coordinate(int lon, int lat)
+        public Coordinate(int lon, int lat)
         {
             Longitude = lon;
             Latitude = lat;

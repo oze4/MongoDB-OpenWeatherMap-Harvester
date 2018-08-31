@@ -19,12 +19,12 @@ namespace csOpenWeather.Weather
 {
 
     [BsonIgnoreExtraElements]
-    internal class Clouds
+    public class Clouds
     {
         [BsonElement(elementName: "CloudCoverPercentage")]
-        internal int CloudCoverPercentage { get; set; }
+        public int CloudCoverPercentage { get; set; }
 
-        internal Clouds(int cloudcoverpercentage)
+        public Clouds(int cloudcoverpercentage)
         {
             CloudCoverPercentage = cloudcoverpercentage;
         }
