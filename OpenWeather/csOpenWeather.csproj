@@ -69,7 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Weather\Harvester.cs" />
+    <Compile Include="Weather\WeatherHarvester.cs" />
     <Compile Include="Weather\Clouds.cs" />
     <Compile Include="Weather\Coordinate.cs" />
     <Compile Include="Weather\Climate.cs" />
