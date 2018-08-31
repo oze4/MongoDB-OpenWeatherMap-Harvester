@@ -51,8 +51,16 @@ namespace csOpenWeather.Mongo
             );
         }
 
+        /* how to get docs from mongo
+           var collection = mongo.GetDatabase("-").GetCollection<BsonDocument>("-");
+           var documents = collection.Find(Builders<BsonDocument>.Filter.Empty).ToList();
+           List<CurrentWeather> woList = new List<CurrentWeather>();
+           foreach (var doc_ in documents) woList.Add(BsonSerializer.Deserialize<CurrentWeather>(doc_));
+           return woList; */
+
         public MongoConnection()
         {
         }
     }
 }
+ 
