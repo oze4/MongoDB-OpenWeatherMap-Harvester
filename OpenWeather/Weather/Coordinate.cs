@@ -15,7 +15,7 @@
 
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace OpenWeatherHarvester.City
+namespace OpenWeatherHarvester.Weather
 {
 
     [BsonIgnoreExtraElements]

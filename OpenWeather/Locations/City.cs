@@ -13,9 +13,9 @@
 
 */
 
-namespace OpenWeatherHarvester.City
+namespace OpenWeatherHarvester.Locations
 {
-    internal enum HarvesterCity
+    internal enum City
     {
         A_Coruna_ES = 3119841,
         A_Estrada_ES = 3119746,

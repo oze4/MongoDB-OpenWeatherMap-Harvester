@@ -13,9 +13,7 @@
 
 */
 
-using System;
 using MongoDB.Bson.Serialization.Attributes;
-using OpenWeatherHarvester.City;
 
 namespace OpenWeatherHarvester.Weather
 {
@@ -23,7 +21,7 @@ namespace OpenWeatherHarvester.Weather
     internal class CurrentWeather
     {
         [BsonElement(elementName: "InternalTimestamp")]
-        internal SanitizedDateTime InternalTimestamp { get; private set; }
+        internal HarvesterDateTime InternalTimestamp { get; private set; }
 
         [BsonElement(elementName: "WeatherId")]
         internal string WeatherId { get; private set; }
@@ -38,16 +36,13 @@ namespace OpenWeatherHarvester.Weather
         internal int Visibility { get; private set; }
 
         [BsonElement(elementName: "Sunrise")]
-        internal SanitizedDateTime Sunrise { get; private set; }
+        internal HarvesterDateTime Sunrise { get; private set; }
 
         [BsonElement(elementName: "Sunset")]
-        internal SanitizedDateTime Sunset { get; private set; }
-
-        [BsonElement(elementName: "Base")]
-        internal string Base { get; private set; }
+        internal HarvesterDateTime Sunset { get; private set; }
 
         [BsonElement(elementName: "DateTimeOfWeatherCalculation")]
-        internal SanitizedDateTime DateTimeOfWeatherCalculation { get; private set; }
+        internal HarvesterDateTime DateTimeOfWeatherCalculation { get; private set; }
 
         [BsonElement(elementName: "Coordinates")]
         internal Coordinate Coordinates { get; private set; }
@@ -65,15 +60,14 @@ namespace OpenWeatherHarvester.Weather
         internal Clouds Clouds { get; private set; }
 
         internal CurrentWeather(
-            SanitizedDateTime internaltimestamp,
+            HarvesterDateTime internaltimestamp,
             string weather_id,
-            string city,
+            string cityname,
             int code,
             int visibility,
-            string base_,
-            SanitizedDateTime datetimeofweathercalculation,
-            SanitizedDateTime sunrise,
-            SanitizedDateTime sunset,
+            HarvesterDateTime datetimeofweathercalculation,
+            HarvesterDateTime sunrise,
+            HarvesterDateTime sunset,
             Coordinate coordinates,
             Conditions conditions, 
             Climate climate, 
@@ -83,10 +77,9 @@ namespace OpenWeatherHarvester.Weather
         {
             InternalTimestamp = internaltimestamp;
             WeatherId = weather_id;
-            CityName = city;
+            CityName = cityname;
             Code = code;
             Visibility = visibility;
-            Base = base_;
             DateTimeOfWeatherCalculation = datetimeofweathercalculation;
             Coordinates = coordinates;
             Sunrise = sunrise;
