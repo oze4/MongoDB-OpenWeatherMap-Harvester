@@ -16,8 +16,9 @@ using Newtonsoft.Json.Linq;
 using System.IO;
 using System.Net;
 using csOpenWeather.Locations;
+using csOpenWeather.Weather;
 
-namespace csOpenWeather.Weather
+namespace csOpenWeather
 {
     internal class WeatherHarvester
     {
