@@ -1,3 +1,3 @@
 # csOpenWeatherMap
 
-Designed to gather weather from OpenWeatherMap.com
+Designed to gather weather from OpenWeatherMap.org
